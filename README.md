@@ -11,7 +11,7 @@ Note that many values are initialized in the Unity Editor, so some initializatio
 
  ## Most Relevant Code
  Most of the game logic resides in Main.cs, Reel.cs, SlotLines.cs, and ReelIconPrefab.cs
- ### **Main.cs**
+ ### [Main.cs](Code/Main.cs)
  Controls the entire game loop in a coroutine. Responsible for handling user input and controlling event (Coroutine) timing in an ordered fashion.
  ### **Reel.cs**
  Handles the logic of spinning and randomizing the icons of the reels.

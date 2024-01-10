@@ -1,5 +1,6 @@
 # Casino Slot Game Demo
 A Casino slot game made in 10 hours over two days to demonstrate my proficiency in Unity3D and C#.
+Can be played at []:https://auhfel.github.io
 
 _Has not been subjected to extensive quality assurance and bugs may exist._
 

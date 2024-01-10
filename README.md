@@ -1,5 +1,5 @@
 # Casino Slot Game Demo
-A Casino slot game _made in 10 hours over two days_ to demonstrate my proficiency in Unity3D and C#.
+A Casino slot game made in 10 hours over two days to demonstrate my proficiency in Unity3D and C#.
 _Has not been subjected to extensive quality assurance and bugs may exist._
 
 ## Notes

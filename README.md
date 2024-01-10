@@ -4,9 +4,9 @@
 ## Notes
 Only the code I wrote for the game is included here. Other engine files (prefabs, assets, etc) are omitted as I've used some paid assets and I don't want to include them in a repo.
 Note that many values are initialized in the Unity Editor, so some initialization may not be apparent.
-This game demo was created in roughly two days, ~10 hours total. It is only a quick mockup and has not been subjected to extensive quality assurance.
+This game demo was** created in roughly two days, ~10 hours total.** It is only a quick mockup and** has not been subjected to extensive quality assurance**.
 
- ## Important Code
+ ## Most Relevant Code
  Most of the game logic resides in Main.cs, Reel.cs, SlotLines.cs, and ReelIconPrefab.cs
  #### Main.cs
  Controls the entire game loop in a coroutine. Responsible for handling user input and controlling event (Coroutine) timing in an ordered fashion.

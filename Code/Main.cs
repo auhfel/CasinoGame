@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Main : MonoBehaviour {
     public static Main instance;
-
+    
     //UI elements
     public TextMeshProUGUI creditsAmountUI, betAmountUI, winningsAmountUI;
     public Slider wildSlider;
@@ -47,39 +47,6 @@ public class Main : MonoBehaviour {
         }
         StartCoroutine(GameLoop());
     }
-
-    public ReelIconPrefab GetRandomSlotObject() {
-        //We could cache this spawn rate, but if we calculate it every frame we can update it dynamically for debugging and testing purposes.
-        float spawnWeightOfAllItems = 0;
-        for (int i = 0; i < slotIconPrefabs.Count; i++)
-            spawnWeightOfAllItems += slotIconPrefabs[i].spawnRate;
-        float randomWeight = Random.Range(0, spawnWeightOfAllItems);
-        float currentWeight = 0;
-        for (int i = 0; i < slotIconPrefabs.Count; i++) {
-            currentWeight += slotIconPrefabs[i].spawnRate;
-            if (randomWeight <= currentWeight)
-                return slotIconPrefabs[i];
-        }
-        //It should be impossible to not return something with the previous loop
-        Debug.LogError("Somehow didn't get a random slot object");
-        return null;
-    }
-    public void IncrementBet() {
-        gameState.currentBetAmount += gameSettings.betIncrement;
-        if (gameState.currentBetAmount > gameSettings.maximumBet)
-            gameState.currentBetAmount = gameSettings.maximumBet;
-        betAmountUI.text = $"{gameState.currentBetAmount}";
-    }
-    public void DecrementBet() {
-        gameState.currentBetAmount -= gameSettings.betIncrement;
-        if (gameState.currentBetAmount < gameSettings.betIncrement)
-            gameState.currentBetAmount = gameSettings.betIncrement;
-        betAmountUI.text = $"{gameState.currentBetAmount}";
-    }
-    void ChangeCredits(float amount) {
-        gameState.currentCredits += amount;
-        creditsAmountUI.text = $"{gameState.currentCredits}";
-    }
     IEnumerator GameLoop() {
         ChangeCredits(10000);
         IncrementBet();
@@ -97,36 +64,6 @@ public class Main : MonoBehaviour {
             wildIconPrefab.spawnRate = Mathf.Lerp(0, 100, wildSlider.value);
             yield return null;
         }
-    }
-
-    public void SpinReelsButton() {
-        spinReelsButton = true;
-    }
-    IEnumerator PlayWinningSound(float winAmount) {
-        float winAmountModifier = winAmount / gameState.currentBetAmount;
-        if (winAmountModifier <= 5)
-            smallWinSound.Play();
-        else if (winAmountModifier > 5)
-            mediumWinSound.Play();
-        else if (winAmountModifier > 25)
-            bigWinSound.Play();
-
-        //Play the winning sound for 3 seconds or until the user spins the reel again
-        float timer = 3f;
-        while (timer > 0) {
-            timer -= Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.S) || spinReelsButton == true) {
-                spinReelsButton = false;
-                timer = 0;
-            }
-            yield return null;
-        }
-        if (winAmountModifier <= 5)
-            smallWinSound.Stop();
-        else if (winAmountModifier > 5)
-            mediumWinSound.Stop();
-        else if (winAmountModifier > 25)
-            bigWinSound.Stop();
     }
     IEnumerator SpinReels() {
         winningsAmountUI.text = string.Empty;
@@ -163,5 +100,66 @@ public class Main : MonoBehaviour {
             StartCoroutine(PlayWinningSound(winnings));
             ChangeCredits(winnings);
         }
+    }
+    public ReelIconPrefab GetRandomSlotObject() {
+        //We could cache this spawn rate, but if we calculate it every frame we can update it dynamically for debugging and testing purposes.
+        float spawnWeightOfAllItems = 0;
+        for (int i = 0; i < slotIconPrefabs.Count; i++)
+            spawnWeightOfAllItems += slotIconPrefabs[i].spawnRate;
+        float randomWeight = Random.Range(0, spawnWeightOfAllItems);
+        float currentWeight = 0;
+        for (int i = 0; i < slotIconPrefabs.Count; i++) {
+            currentWeight += slotIconPrefabs[i].spawnRate;
+            if (randomWeight <= currentWeight)
+                return slotIconPrefabs[i];
+        }
+        //It should be impossible to not return something with the previous loop
+        Debug.LogError("Somehow didn't get a random slot object");
+        return null;
+    }
+    public void IncrementBet() {
+        gameState.currentBetAmount += gameSettings.betIncrement;
+        if (gameState.currentBetAmount > gameSettings.maximumBet)
+            gameState.currentBetAmount = gameSettings.maximumBet;
+        betAmountUI.text = $"{gameState.currentBetAmount}";
+    }
+    public void DecrementBet() {
+        gameState.currentBetAmount -= gameSettings.betIncrement;
+        if (gameState.currentBetAmount < gameSettings.betIncrement)
+            gameState.currentBetAmount = gameSettings.betIncrement;
+        betAmountUI.text = $"{gameState.currentBetAmount}";
+    }
+    void ChangeCredits(float amount) {
+        gameState.currentCredits += amount;
+        creditsAmountUI.text = $"{gameState.currentCredits}";
+    }
+    public void SpinReelsButton() {
+        spinReelsButton = true;
+    }
+    IEnumerator PlayWinningSound(float winAmount) {
+        float winAmountModifier = winAmount / gameState.currentBetAmount;
+        if (winAmountModifier <= 5)
+            smallWinSound.Play();
+        else if (winAmountModifier > 5)
+            mediumWinSound.Play();
+        else if (winAmountModifier > 25)
+            bigWinSound.Play();
+
+        //Play the winning sound for 3 seconds or until the user spins the reel again
+        float timer = 3f;
+        while (timer > 0) {
+            timer -= Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.S) || spinReelsButton == true) {
+                spinReelsButton = false;
+                timer = 0;
+            }
+            yield return null;
+        }
+        if (winAmountModifier <= 5)
+            smallWinSound.Stop();
+        else if (winAmountModifier > 5)
+            mediumWinSound.Stop();
+        else if (winAmountModifier > 25)
+            bigWinSound.Stop();
     }
 }

@@ -1,9 +1,9 @@
 # Casino Slot Game Demo
-A Casino slot game **made in 10 hours over two days** to demonstrate my proficiency in Unity3D and C#.
-Has not been subjected to extensive quality assurance and bugs may exist.
+A Casino slot game _made in 10 hours over two days_ to demonstrate my proficiency in Unity3D and C#.
+_Has not been subjected to extensive quality assurance and bugs may exist._
 
 ## Notes
-Only the code I wrote for the game is included here. Other engine files (prefabs, assets, etc) are omitted as I've used some paid assets and I don't want to include them in a public repository.
+Only the code I've written for the game is included here. Other engine files (prefabs, assets, etc) are omitted as paid assets are used and shouldn't be included in a public repository.
 Note that many values are initialized in the Unity Editor, so some initialization may not be apparent.
 
  ## Most Relevant Code

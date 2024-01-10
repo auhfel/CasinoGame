@@ -1,6 +1,7 @@
 # Casino Slot Game Demo
 A Casino slot game made in 10 hours over two days to demonstrate my proficiency in Unity3D and C#.
-Can be played at https://auhfel.github.io
+
+Can be played at https://auhfel.github.io Designed for Desktop, however it's possible to run on mobile. When playing on mobile, best to request desktop site, maximize the game using the lower right button, and switch to portrait mode.
 
 _Has not been subjected to extensive quality assurance and bugs may exist._
 
